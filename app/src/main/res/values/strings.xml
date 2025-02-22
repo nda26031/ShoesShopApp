@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ShoesShopApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titleIntroduce">Step into Style with Every Pair</string>
+    <string name="subTitleIntroduce">Discover the perfect blend of comfort and fashion at our shoe shop, where each pair is crafted to elevate your every step</string>
+</resources>
