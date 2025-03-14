@@ -1,4 +1,4 @@
-package com.example.shoesshopapp.fragment.introduce
+package com.example.shoesshopapp.ui.fragment.introduce
 
 import android.os.Bundle
 import android.util.Log

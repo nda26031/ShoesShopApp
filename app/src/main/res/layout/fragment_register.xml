@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.register.RegisterFragment">
+    tools:context=".ui.fragment.register.RegisterFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
-        android:id="@+id/tvRegister"
+        android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
@@ -45,12 +45,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        app:helperText="Required"
+        app:helperTextTextColor="@color/dark_brown"
         app:hintEnabled="false"
         app:hintTextColor="@color/gray"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/tvRegister"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/tvLogin">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtUsername"
@@ -73,12 +74,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        app:helperText="Required"
+        app:helperTextTextColor="@color/dark_brown"
+        app:hintAnimationEnabled="true"
         app:hintEnabled="false"
         app:hintTextColor="@color/gray"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/tilUsername"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/tilUsername">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtEmail"
@@ -87,6 +90,7 @@
             android:background="@drawable/edt_input"
             android:drawableStart="@drawable/custom_icon_email"
             android:drawablePadding="13dp"
+            android:focusable="true"
             android:fontFamily="@font/poppins_regular"
             android:hint="Email"
             android:inputType="textEmailAddress"
@@ -100,6 +104,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        app:helperText="Required"
+        app:helperTextTextColor="@color/dark_brown"
         app:hintEnabled="false"
         app:hintTextColor="@color/gray"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
@@ -120,7 +126,9 @@
             android:inputType="textPassword"
             android:padding="15dp"
             android:textColorHint="@color/gray"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:helperText="Required"
+            app:helperTextTextColor="@color/dark_brown" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -128,6 +136,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        app:helperText="Required"
+        app:helperTextTextColor="@color/dark_brown"
         app:hintEnabled="false"
         app:hintTextColor="@color/gray"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
@@ -151,8 +161,92 @@
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilFullName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:helperText="Required"
+        app:helperTextTextColor="@color/dark_brown"
+        app:hintEnabled="false"
+        app:hintTextColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/tilConfirmPassword">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edt_input"
+            android:drawableStart="@drawable/custom_icon_name"
+            android:drawablePadding="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            android:padding="15dp"
+            android:textColorHint="@color/gray"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:helperText="Required"
+        app:helperTextTextColor="@color/dark_brown"
+        app:hintEnabled="false"
+        app:hintTextColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/tilFullName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edt_input"
+            android:drawableStart="@drawable/custom_icon_address"
+            android:drawablePadding="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Adress"
+            android:inputType="text"
+            android:padding="15dp"
+            android:textColorHint="@color/gray"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:helperText="Required"
+        app:helperTextTextColor="@color/dark_brown"
+        app:hintEnabled="false"
+        app:hintTextColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/tilAddress">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edt_input"
+            android:drawableStart="@drawable/custom_icon_phone"
+            android:drawablePadding="13dp"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Phone number"
+            android:inputType="phone"
+            android:padding="15dp"
+            android:textColorHint="@color/gray"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -162,134 +256,134 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/tilConfirmPassword" />
+        app:layout_constraintTop_toBottomOf="@id/tilPhone" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clOtherLogin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/btnLogin">
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/clOtherLogin"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintEnd_toEndOf="@id/guideline2"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/guideline1"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/btnRegister">-->
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="wrap_content"
-            android:layout_height="0.8dp"
-            android:layout_weight="1"
-            android:background="@color/gray"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!--        <View-->
+    <!--            android:id="@+id/view"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="0.8dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:background="@color/gray"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toStartOf="@+id/textView"-->
+    <!--            app:layout_constraintHorizontal_bias="0.5"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Or register with"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/view2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/view"
-            app:layout_constraintTop_toTopOf="parent" />
+    <!--        <TextView-->
+    <!--            android:id="@+id/textView"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginHorizontal="12dp"-->
+    <!--            android:fontFamily="@font/poppins_regular"-->
+    <!--            android:text="Or register with"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toStartOf="@+id/view2"-->
+    <!--            app:layout_constraintHorizontal_bias="0.5"-->
+    <!--            app:layout_constraintStart_toEndOf="@+id/view"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="wrap_content"
-            android:layout_height="0.8dp"
-            android:layout_weight="1"
-            android:background="@color/gray"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--        <View-->
+    <!--            android:id="@+id/view2"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="0.8dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:background="@color/gray"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintHorizontal_bias="0.5"-->
+    <!--            app:layout_constraintStart_toEndOf="@+id/textView"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/clOtherLogin">
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="@id/guideline2"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/guideline1"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/clOtherLogin">-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clFacebook"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:background="@drawable/custom_other_login"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--            android:id="@+id/clFacebook"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="60dp"-->
+    <!--            android:background="@drawable/custom_other_login"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent">-->
 
-            <ImageView
-                android:id="@+id/imgFacebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/image_facebook"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <!--            <ImageView-->
+    <!--                android:id="@+id/imgFacebook"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginStart="10dp"-->
+    <!--                android:src="@drawable/image_facebook"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                app:layout_constraintStart_toStartOf="parent"-->
+    <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-            <TextView
-                android:id="@+id/tvFacebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Facebook"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imgFacebook"
-                app:layout_constraintTop_toTopOf="parent" />
+    <!--            <TextView-->
+    <!--                android:id="@+id/tvFacebook"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginHorizontal="10dp"-->
+    <!--                android:fontFamily="@font/poppins_regular"-->
+    <!--                android:text="Facebook"-->
+    <!--                android:textSize="12sp"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintStart_toEndOf="@+id/imgFacebook"-->
+    <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clGmail"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:background="@drawable/custom_other_login"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--            android:id="@+id/clGmail"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="60dp"-->
+    <!--            android:background="@drawable/custom_other_login"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent">-->
 
-            <ImageView
-                android:id="@+id/imgGmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/image_gmail"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <!--            <ImageView-->
+    <!--                android:id="@+id/imgGmail"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginStart="10dp"-->
+    <!--                android:src="@drawable/image_gmail"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                app:layout_constraintStart_toStartOf="parent"-->
+    <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-            <TextView
-                android:id="@+id/tvGmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Facebook"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imgGmail"
-                app:layout_constraintTop_toTopOf="parent" />
+    <!--            <TextView-->
+    <!--                android:id="@+id/tvGmail"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginHorizontal="10dp"-->
+    <!--                android:fontFamily="@font/poppins_regular"-->
+    <!--                android:text="Facebook"-->
+    <!--                android:textSize="12sp"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintStart_toEndOf="@+id/imgGmail"-->
+    <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -311,6 +405,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.20" />
+        app:layout_constraintGuide_percent="0.15" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

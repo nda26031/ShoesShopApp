@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.introduce.IntroduceFragment">
+    tools:context=".ui.fragment.introduce.IntroduceFragment">
 
     <ImageView
         android:layout_width="match_parent"
