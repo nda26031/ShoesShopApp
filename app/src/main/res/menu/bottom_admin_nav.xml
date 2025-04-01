@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/brand"
+        android:icon="@drawable/brand_icon"
+        android:title="Brand" />
+    <item
+        android:id="@+id/product"
+        android:icon="@drawable/product_icon"
+        android:title="Product" />
+    <item
+        android:id="@+id/order"
+        android:icon="@drawable/order_icon"
+        android:title="Order" />
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/setting_icon"
+        android:title="Setting" />
+</menu>
