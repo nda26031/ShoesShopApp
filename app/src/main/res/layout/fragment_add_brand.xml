@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.admin.brand.brandManger.AddBrandFragment">
+    tools:context=".ui.fragment.admin.brand.brandManger.addBrand.AddBrandFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTitle"
@@ -42,8 +42,7 @@
         android:layout_height="0dp"
         android:layout_margin="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clTitle"
-        >
+        app:layout_constraintTop_toBottomOf="@id/clTitle">
 
         <TextView
             android:id="@+id/tvBrandName"
@@ -88,16 +87,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tilBrandName" />
 
+        <ImageView
+            android:id="@+id/ivBrandLogo"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toBottomOf="@+id/tvBrandLogo" />
+
+
         <Button
             android:id="@+id/btnAddBrandLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="@drawable/btn_let_go"
             android:fontFamily="@font/poppins_medium"
             android:text="  Logo   "
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvBrandLogo" />
+            app:layout_constraintTop_toBottomOf="@+id/ivBrandLogo" />
 
         <Button
             android:id="@+id/btnAddBrand"

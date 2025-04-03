@@ -6,27 +6,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoesshopapp.R
 import com.example.shoesshopapp.databinding.FragmentBrandManagerBinding
 import com.example.shoesshopapp.model.data.Brand
-import com.example.shoesshopapp.model.data.UIState
-import com.example.shoesshopapp.ui.fragment.admin.brand.brandManger.AddBrandFragment
-import com.example.shoesshopapp.ui.fragment.admin.brand.brandManger.UpdateBrandFragment
+import com.example.shoesshopapp.ui.fragment.admin.brand.brandManger.addBrand.AddBrandFragment
+import com.example.shoesshopapp.ui.fragment.admin.brand.brandManger.updateBrand.UpdateBrandFragment
 
 
 class BrandManagerFragment : Fragment() {
 
     private lateinit var binding: FragmentBrandManagerBinding
 
-    private val brandViewModel: BrandViewModel by lazy {
+    private val brandManagerViewModel: BrandManagerViewModel by lazy {
         ViewModelProvider(
             this,
-            BrandViewModel.BrandViewModelFactory(requireActivity().application)
-        )[BrandViewModel::class.java]
+            BrandManagerViewModel.BrandViewModelFactory(requireActivity().application)
+        )[BrandManagerViewModel::class.java]
     }
 
     private val brandAdapter: BrandAdapter by lazy {
@@ -48,19 +47,32 @@ class BrandManagerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val rvBrand = binding.rvBrand
-        rvBrand.adapter = brandAdapter
-        rvBrand.layoutManager = LinearLayoutManager(context)
-
-        brandViewModel.getAllBrands().observe(viewLifecycleOwner) {
-            brandAdapter.submitList(it)
-        }
-
         binding.fabAddBrand.setOnClickListener {
             replaceFragment(AddBrandFragment())
         }
-        observeUiState()
 
+        setupAdapter()
+        getAllBrand()
+
+    }
+
+    private fun setupAdapter() {
+        binding.rvBrand.adapter = brandAdapter
+        binding.rvBrand.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun getAllBrand() {
+        brandManagerViewModel.getAllBrands().observe(viewLifecycleOwner) { brands ->
+            brandAdapter.submitList(brands)
+        }
+    }
+
+    private fun searchBrand(query: String) {
+        val searchQuery = "%$query%"
+
+        brandManagerViewModel.searchBrands(searchQuery).observe(viewLifecycleOwner) {
+            brandAdapter.submitList(it)
+        }
     }
 
     private fun onClickEdit(brand: Brand) {
@@ -69,7 +81,7 @@ class BrandManagerFragment : Fragment() {
         Log.d("BrandManagerFragment", "Put Brand ID: ${brand.brandId}")
         val updateBrandFragment = UpdateBrandFragment()
         updateBrandFragment.arguments = bundle
-        replaceFragment(UpdateBrandFragment())
+        replaceFragment(updateBrandFragment)
     }
 
     private fun onClickDelete(brand: Brand) {
@@ -81,7 +93,7 @@ class BrandManagerFragment : Fragment() {
             .setTitle("Delete Brand")
             .setMessage("Are you sure you want to delete ${brand.brandName} ?")
             .setPositiveButton("Delete") { _, _ ->
-                brandViewModel.deleteBrandById(brand.brandId)
+                brandManagerViewModel.deleteBrand(brand)
             }
             .setNegativeButton("Cancel", null)
             .show()
@@ -93,24 +105,5 @@ class BrandManagerFragment : Fragment() {
         fragmentTransaction.commit()
     }
 
-    private fun observeUiState() {
-        brandViewModel.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is UIState.Error -> Toast.makeText(
-                    requireContext(),
-                    state.errorMessage,
-                    Toast.LENGTH_SHORT
-                ).show()
 
-                UIState.Loading -> {
-                    // Show loading state if needed
-                }
-                is UIState.Success -> Toast.makeText(
-                    requireContext(),
-                    state.message,
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
-    }
 }

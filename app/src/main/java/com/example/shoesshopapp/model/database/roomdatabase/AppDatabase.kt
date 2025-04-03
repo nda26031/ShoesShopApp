@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.shoesshopapp.model.data.Account
 import com.example.shoesshopapp.model.data.Admin
 import com.example.shoesshopapp.model.data.Brand
+import com.example.shoesshopapp.model.data.Converters
 import com.example.shoesshopapp.model.data.FavouriteProduct
 import com.example.shoesshopapp.model.data.Product
 import com.example.shoesshopapp.model.data.ProductSize
@@ -34,6 +36,7 @@ import kotlinx.coroutines.launch
     ],
     version = 1
 )
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getAccountDao(): AccountDAO
     abstract fun getUserDao(): UserDAO

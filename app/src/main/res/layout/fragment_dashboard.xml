@@ -24,16 +24,16 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_black"
         android:text="ShoesShopApp"
-        android:textColor="@color/dark_green"
+        android:textColor="@color/dark_brown"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/guideline1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvWelcome" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvCart"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
         app:cardCornerRadius="100dp"
         app:layout_constraintBottom_toBottomOf="@id/guideline1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginVertical="4dp"
-        android:layout_marginEnd="10dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,6 +75,19 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
+    <TextView
+        android:id="@+id/tvSeeAllBrand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="See all"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textAlignment="textEnd"
+        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvOfficialBrand"
         android:layout_width="match_parent"
@@ -92,6 +104,19 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/rvOfficialBrand" />
+
+    <TextView
+        android:id="@+id/tvSeeAllRecommendationProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="See all"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textAlignment="textEnd"
         app:layout_constraintTop_toBottomOf="@id/rvOfficialBrand" />
 
     <androidx.recyclerview.widget.RecyclerView

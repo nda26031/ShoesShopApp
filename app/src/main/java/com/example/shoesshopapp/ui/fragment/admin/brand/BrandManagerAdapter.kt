@@ -1,6 +1,5 @@
 package com.example.shoesshopapp.ui.fragment.admin.brand
 
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -14,31 +13,34 @@ class BrandAdapter(
     private val onClickDelete: (Brand) -> Unit
 ) : ListAdapter<Brand, BrandAdapter.BrandViewHolder>(BrandDiffUtil()) {
 
-    inner class BrandViewHolder(
+    class BrandViewHolder(
         private val binding: BrandManagerItemLayoutBinding,
         private val onClickEdit: (Brand) -> Unit,
         private val onClickDelete: (Brand) -> Unit
     ) :
         ViewHolder(binding.root) {
         fun bind(brand: Brand) {
-            val bitmap =
-                BitmapFactory.decodeByteArray(brand.brandLogo, 0, brand.brandLogo.size)
-            binding.imgBrand.setImageBitmap(bitmap)
             binding.tvBrandName.text = brand.brandName
+            brand.brandLogo.let {
+                binding.imgBrand.setImageBitmap(it)
+            }
 
             binding.imgEdit.setOnClickListener {
-                onClickEdit(brand)
+                onClickEdit.invoke(brand)
             }
 
             binding.imgDelete.setOnClickListener {
-                onClickDelete(brand)
+                onClickDelete.invoke(brand)
             }
-
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrandViewHolder {
-        val binding = BrandManagerItemLayoutBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = BrandManagerItemLayoutBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return BrandViewHolder(binding, onClickEdit, onClickDelete)
     }
 

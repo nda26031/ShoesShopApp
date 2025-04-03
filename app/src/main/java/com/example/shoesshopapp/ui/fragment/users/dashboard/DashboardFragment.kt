@@ -5,14 +5,68 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoesshopapp.R
+import com.example.shoesshopapp.databinding.FragmentDashboardBinding
+import com.example.shoesshopapp.ui.fragment.users.brand.BrandFragment
+import com.example.shoesshopapp.ui.fragment.users.cart.CartFragment
+import com.example.shoesshopapp.ui.fragment.users.product.ProductFragment
 
 class DashboardFragment : Fragment() {
+
+    private lateinit var binding: FragmentDashboardBinding
+    private val officialBrandAdapter = OfficialBrandAdapter()
+    private val dashboardViewModel: DashboardViewModel by lazy {
+        ViewModelProvider(
+            this,
+            DashboardViewModel.DashboardModelFactory(requireActivity().application)
+        )[DashboardViewModel::class.java]
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+        binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        setupNavigate()
+        setupOfficialBrandRecyclerView()
+        dashboardViewModel.getAllBrands().observe(viewLifecycleOwner) {
+            officialBrandAdapter.submitList(it)
+        }
+    }
+
+    private fun setupNavigate() {
+        binding.cvCart.setOnClickListener {
+            replaceFragment(CartFragment())
+        }
+
+        binding.tvSeeAllBrand.setOnClickListener {
+            replaceFragment(BrandFragment())
+        }
+
+        binding.tvSeeAllRecommendationProduct.setOnClickListener {
+            replaceFragment(ProductFragment())
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentTransaction = parentFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.clUserHome, fragment)
+        fragmentTransaction.commit()
+    }
+
+    private fun setupOfficialBrandRecyclerView() {
+        binding.rvOfficialBrand.adapter = officialBrandAdapter
+        binding.rvOfficialBrand.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 }
