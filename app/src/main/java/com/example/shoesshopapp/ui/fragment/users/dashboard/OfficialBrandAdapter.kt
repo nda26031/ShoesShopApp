@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.shoesshopapp.databinding.BrandDashboartItemLayoutBinding
+import com.example.shoesshopapp.databinding.ItemBrandDashboardLayoutBinding
 import com.example.shoesshopapp.model.data.Brand
 
 class OfficialBrandAdapter :
     ListAdapter<Brand, OfficialBrandAdapter.OfficialBrandViewHolder>(OfficialBrandDiffUtil()) {
-    class OfficialBrandViewHolder(private val binding: BrandDashboartItemLayoutBinding) :
+    class OfficialBrandViewHolder(private val binding: ItemBrandDashboardLayoutBinding) :
         ViewHolder(binding.root) {
         fun bind(brand: Brand) {
             brand.brandLogo.let {
@@ -22,7 +22,7 @@ class OfficialBrandAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OfficialBrandViewHolder {
-        val binding = BrandDashboartItemLayoutBinding.inflate(
+        val binding = ItemBrandDashboardLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

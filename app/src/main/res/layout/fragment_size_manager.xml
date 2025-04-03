@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.admin.product.addSize.SizeManagerFragment">
+    tools:context=".ui.fragment.admin.product.sizeManager.SizeManagerFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTitle"
@@ -45,47 +45,23 @@
         app:layout_constraintTop_toBottomOf="@id/clTitle">
 
         <TextView
-            android:id="@+id/tvSizeTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvTitleProductName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Size: "
-            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Nike Airforce 1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvSize"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="39"
-            app:layout_constraintStart_toEndOf="@id/tvSizeTitle"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvQuantityTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Quantity: "
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSizeTitle" />
-
-        <TextView
-            android:id="@+id/tvQuantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="399999"
-            app:layout_constraintStart_toEndOf="@id/tvQuantityTitle"
-            app:layout_constraintTop_toTopOf="@id/tvQuantityTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSize"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleProductName"
+            tools:listitem="@layout/item_size_manager_layout" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAddSize"

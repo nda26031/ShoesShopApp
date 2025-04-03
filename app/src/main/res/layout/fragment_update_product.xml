@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.admin.product.productManager.addProduct.AddProductFragment">
+    tools:context=".ui.fragment.admin.product.productManager.updateProduct.UpdateProductFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTitle"
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_black"
-            android:text="ADD PRODUCT"
+            android:text="UPDATE PRODUCT"
             android:textColor="@color/dark_brown"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edt_input"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Product Price"
+                android:hint="Brand Name"
                 android:inputType="text"
                 android:padding="15dp"
                 android:textColorHint="@color/gray"
@@ -183,7 +183,7 @@
             android:paddingHorizontal="20dp"
             android:text="Select Image"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/btnAddProduct"
+            app:layout_constraintBottom_toTopOf="@id/btnUpdateProduct"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -207,13 +207,13 @@
             app:layout_constraintTop_toTopOf="@id/btnAddProductImage" />
 
         <Button
-            android:id="@+id/btnAddProduct"
+            android:id="@+id/btnUpdateProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/btn_let_go"
             android:fontFamily="@font/poppins_medium"
-            android:text="Add"
+            android:text="Update"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

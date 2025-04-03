@@ -31,17 +31,20 @@ interface ProductDAO {
     @Query("SELECT * FROM product")
     fun getAllProduct(): LiveData<List<Product>>
 
+    @Query("SELECT * FROM product WHERE productId = :productId")
+    fun getProductById(productId: Int): LiveData<Product>
+
     @Query("SELECT * FROM product WHERE recommendation = 1")
     fun getRecommendationProduct(): LiveData<List<Product>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSize(productSize: ProductSize)
+    @Query("SELECT * FROM product WHERE productName = :productName AND brandId=:brandId LIMIT 1")
+    fun getProductByNameAndBrand(productName: String, brandId: Int): Product?
 
     @Query("DELETE FROM product_size WHERE productId = :productId")
     suspend fun deleteProductSizes(productId: Int)
 
-    @Query("SELECT * FROM product WHERE productName = :productName AND brandId=:brandId LIMIT 1")
-    fun getProductByNameAndBrand(productName: String, brandId: Int): Product?
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSize(productSize: ProductSize)
 
     @Transaction
     suspend fun addProductWithSizes(product: Product, size: ProductSize): Int {

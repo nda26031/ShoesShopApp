@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.shoesshopapp.model.data.Brand
 import com.example.shoesshopapp.model.database.repository.BrandRepository
-import com.example.shoesshopapp.ui.fragment.admin.brand.BrandManagerViewModel
 import kotlinx.coroutines.launch
 
 class AddBrandViewModel(application: Application) : AndroidViewModel(application) {

@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.shoesshopapp.databinding.BrandManagerItemLayoutBinding
+import com.example.shoesshopapp.databinding.ItemBrandManagerLayoutBinding
 import com.example.shoesshopapp.model.data.Brand
 
-class BrandAdapter(
+class BrandManagerAdapter(
     private val onClickEdit: (Brand) -> Unit,
     private val onClickDelete: (Brand) -> Unit
-) : ListAdapter<Brand, BrandAdapter.BrandViewHolder>(BrandDiffUtil()) {
+) : ListAdapter<Brand, BrandManagerAdapter.BrandViewHolder>(BrandManagerDiffUtil()) {
 
     class BrandViewHolder(
-        private val binding: BrandManagerItemLayoutBinding,
+        private val binding: ItemBrandManagerLayoutBinding,
         private val onClickEdit: (Brand) -> Unit,
         private val onClickDelete: (Brand) -> Unit
     ) :
@@ -36,7 +36,7 @@ class BrandAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrandViewHolder {
-        val binding = BrandManagerItemLayoutBinding.inflate(
+        val binding = ItemBrandManagerLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -50,7 +50,7 @@ class BrandAdapter(
     }
 }
 
-class BrandDiffUtil : DiffUtil.ItemCallback<Brand>() {
+class BrandManagerDiffUtil : DiffUtil.ItemCallback<Brand>() {
     override fun areItemsTheSame(oldItem: Brand, newItem: Brand): Boolean {
         return oldItem.brandId == newItem.brandId
     }

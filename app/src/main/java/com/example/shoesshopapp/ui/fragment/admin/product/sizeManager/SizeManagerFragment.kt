@@ -1,37 +1,38 @@
-package com.example.shoesshopapp.ui.fragment.admin.product.addProduct
+package com.example.shoesshopapp.ui.fragment.admin.product.sizeManager
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.shoesshopapp.R
-import com.example.shoesshopapp.databinding.FragmentAddProductBinding
+import com.example.shoesshopapp.databinding.FragmentSizeManagerBinding
 import com.example.shoesshopapp.ui.fragment.admin.product.ProductManagerFragment
+import com.example.shoesshopapp.ui.fragment.admin.product.sizeManager.addSize.AddSizeFragment
 
-class AddProductFragment : Fragment() {
+class SizeManagerFragment : Fragment() {
 
-    private lateinit var binding: FragmentAddProductBinding
+    private lateinit var binding : FragmentSizeManagerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        binding = FragmentAddProductBinding.inflate(inflater, container, false)
+        binding = FragmentSizeManagerBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.fabAddSize.setOnClickListener {
+            replaceFragment(AddSizeFragment())
+        }
+
         binding.ivBack.setOnClickListener {
             replaceFragment(ProductManagerFragment())
         }
 
-        binding.btnAddProduct.setOnClickListener {
-            replaceFragment(ProductManagerFragment())
-        }
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -39,4 +40,5 @@ class AddProductFragment : Fragment() {
         fragmentTransaction.replace(R.id.clAdminHome, fragment)
         fragmentTransaction.commit()
     }
+
 }

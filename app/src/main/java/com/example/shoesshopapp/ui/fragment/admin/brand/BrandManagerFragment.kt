@@ -28,8 +28,8 @@ class BrandManagerFragment : Fragment() {
         )[BrandManagerViewModel::class.java]
     }
 
-    private val brandAdapter: BrandAdapter by lazy {
-        BrandAdapter(
+    private val brandAdapter: BrandManagerAdapter by lazy {
+        BrandManagerAdapter(
             onClickEdit = { brand -> onClickEdit(brand) },
             onClickDelete = { brand -> onClickDelete(brand) }
         )
@@ -69,7 +69,6 @@ class BrandManagerFragment : Fragment() {
 
     private fun searchBrand(query: String) {
         val searchQuery = "%$query%"
-
         brandManagerViewModel.searchBrands(searchQuery).observe(viewLifecycleOwner) {
             brandAdapter.submitList(it)
         }
