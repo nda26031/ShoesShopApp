@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.SearchView.OnQueryTextListener
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoesshopapp.R
 import com.example.shoesshopapp.databinding.FragmentProductBinding
@@ -94,7 +95,12 @@ class ProductFragment : Fragment() {
     }
 
     private fun onItemClick(product: Product) {
-        replaceFragment(ProductDetailFragment())
+        val bundle = Bundle()
+        bundle.putInt("productId", product.productId)
+        findNavController().navigate(R.id.action_userHomeFragment_to_productDetailFragment, bundle)
+//        val productDetailFragment = ProductDetailFragment()
+//        productDetailFragment.arguments = bundle
+//        replaceFragment(productDetailFragment)
     }
 
     private fun onAddToCartClick(product: Product) {

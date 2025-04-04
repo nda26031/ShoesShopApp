@@ -9,6 +9,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.example.shoesshopapp.model.data.Product
+import com.example.shoesshopapp.model.data.relationship.ProductWithSizes
 
 @Dao
 interface ProductDAO {
@@ -33,4 +34,8 @@ interface ProductDAO {
 
     @Query("SELECT * FROM product WHERE recommendation = 1")
     fun getAllRecommendedProduct(): LiveData<List<Product>>
+
+    @Transaction
+    @Query("SELECT * FROM product WHERE productId = :productId")
+    fun getProductWithSizes(productId: Int): LiveData<ProductWithSizes>
 }

@@ -75,5 +75,17 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/userHomeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_userHomeFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.shoesshopapp.ui.fragment.users.product.productDetail.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" >
+        <action
+            android:id="@+id/action_productDetailFragment_to_userHomeFragment"
+            app:destination="@id/userHomeFragment" />
     </fragment>
 </navigation>
