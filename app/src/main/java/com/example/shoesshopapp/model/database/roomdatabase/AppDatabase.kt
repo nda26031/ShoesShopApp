@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.shoesshopapp.model.data.Account
 import com.example.shoesshopapp.model.data.Admin
 import com.example.shoesshopapp.model.data.Brand
+import com.example.shoesshopapp.model.data.Converters
 import com.example.shoesshopapp.model.data.FavouriteProduct
 import com.example.shoesshopapp.model.data.Product
 import com.example.shoesshopapp.model.data.ProductSize
@@ -17,6 +19,7 @@ import com.example.shoesshopapp.model.database.dao.AdminDAO
 import com.example.shoesshopapp.model.database.dao.BrandDAO
 import com.example.shoesshopapp.model.database.dao.FavouriteProductDAO
 import com.example.shoesshopapp.model.database.dao.ProductDAO
+import com.example.shoesshopapp.model.database.dao.ProductSizeDAO
 import com.example.shoesshopapp.model.database.dao.UserDAO
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,14 +35,16 @@ import kotlinx.coroutines.launch
         ProductSize::class,
         FavouriteProduct::class
     ],
-    version = 1
+    version = 1,
 )
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getAccountDao(): AccountDAO
     abstract fun getUserDao(): UserDAO
     abstract fun getAdminDao(): AdminDAO
     abstract fun getBrandDao(): BrandDAO
     abstract fun getProductDao(): ProductDAO
+    abstract fun getProductSizeDao(): ProductSizeDAO
     abstract fun getFavouriteProductDao(): FavouriteProductDAO
 
 
@@ -52,7 +57,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "app_database5"
+                    "app_database"
                 ).addCallback(roomDatabaseCallback)
                     .build()
                 INSTANCE = instance

@@ -14,6 +14,7 @@ import com.example.shoesshopapp.ui.fragment.users.brand.BrandFragment
 import com.example.shoesshopapp.ui.fragment.users.cart.CartFragment
 import com.example.shoesshopapp.ui.fragment.users.dashboard.DashboardFragment
 import com.example.shoesshopapp.ui.fragment.users.favourite.FavouriteProductFragment
+import com.example.shoesshopapp.ui.fragment.users.order.OrderFragment
 import com.example.shoesshopapp.ui.fragment.users.product.ProductFragment
 
 
@@ -24,7 +25,7 @@ class UserHomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentUserHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -38,7 +39,7 @@ class UserHomeFragment : Fragment() {
         binding.bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.dashboard -> {
-                    replaceFragment(FavouriteProductFragment())
+                    replaceFragment(DashboardFragment())
                     true
                 }
 
@@ -52,8 +53,8 @@ class UserHomeFragment : Fragment() {
                     true
                 }
 
-                R.id.cart -> {
-                    replaceFragment(CartFragment())
+                R.id.order -> {
+                    replaceFragment(OrderFragment())
                     true
                 }
 

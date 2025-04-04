@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.admin.product.addProduct.AddProductFragment">
+    tools:context=".ui.fragment.admin.product.productManager.addProduct.AddProductFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTitle"
@@ -57,8 +57,6 @@
             android:id="@+id/tilProductName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:helperText="Required"
-            app:helperTextTextColor="@color/dark_brown"
             app:hintEnabled="false"
             app:hintTextColor="@color/gray"
             app:layout_constraintTop_toBottomOf="@+id/tvProductName">
@@ -90,8 +88,6 @@
             android:id="@+id/tilProductDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:helperText="Required"
-            app:helperTextTextColor="@color/dark_brown"
             app:hintEnabled="false"
             app:hintTextColor="@color/gray"
             app:layout_constraintTop_toBottomOf="@+id/tvProductDescription">
@@ -119,28 +115,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilProductDescription" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilBrand"
+        <Spinner
+            android:id="@+id/spinnerBrand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:helperText="Required"
-            app:helperTextTextColor="@color/dark_brown"
-            app:hintEnabled="false"
-            app:hintTextColor="@color/gray"
-            app:layout_constraintTop_toBottomOf="@+id/tvBrand">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtBrandDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edt_input"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Brand Name"
-                android:inputType="text"
-                android:padding="15dp"
-                android:textColorHint="@color/gray"
-                android:textSize="14sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBrand" />
 
         <TextView
             android:id="@+id/tvProductPrice"
@@ -148,16 +131,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Brand"
+            android:text="Price"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilBrand" />
+            app:layout_constraintTop_toBottomOf="@id/spinnerBrand" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilProductPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:helperText="Required"
-            app:helperTextTextColor="@color/dark_brown"
             app:hintEnabled="false"
             app:hintTextColor="@color/gray"
             app:layout_constraintTop_toBottomOf="@+id/tvProductPrice">
@@ -168,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edt_input"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Brand Name"
+                android:hint="Product Price"
                 android:inputType="text"
                 android:padding="15dp"
                 android:textColorHint="@color/gray"
@@ -185,16 +166,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tilProductPrice" />
 
+        <ImageView
+            android:id="@+id/ivProductImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/btnAddProductImage"
+            app:layout_constraintTop_toBottomOf="@id/tvProductImage" />
+
         <Button
             android:id="@+id/btnAddProductImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
             android:background="@drawable/btn_let_go"
             android:fontFamily="@font/poppins_medium"
-            android:text="  Image   "
+            android:paddingHorizontal="20dp"
+            android:text="Select Image"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductImage" />
+            app:layout_constraintBottom_toTopOf="@id/btnAddProduct"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvRecommendation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Recommendation:"
+            app:layout_constraintBottom_toBottomOf="@id/btnAddProductImage"
+            app:layout_constraintStart_toEndOf="@id/btnAddProductImage"
+            app:layout_constraintTop_toTopOf="@id/btnAddProductImage" />
+
+        <CheckBox
+            android:id="@+id/cbRecommendation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/btnAddProductImage"
+            app:layout_constraintStart_toEndOf="@id/tvRecommendation"
+            app:layout_constraintTop_toTopOf="@id/btnAddProductImage" />
 
         <Button
             android:id="@+id/btnAddProduct"
@@ -203,10 +213,10 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/btn_let_go"
             android:fontFamily="@font/poppins_medium"
-            android:text="  Add   "
+            android:text="Add"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAddProductImage" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

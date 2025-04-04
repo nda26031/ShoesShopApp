@@ -1,44 +1,46 @@
 package com.example.shoesshopapp.ui.fragment.admin.brand
 
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.shoesshopapp.databinding.BrandManagerItemLayoutBinding
+import com.example.shoesshopapp.databinding.ItemBrandManagerLayoutBinding
 import com.example.shoesshopapp.model.data.Brand
 
-class BrandAdapter(
+class BrandManagerAdapter(
     private val onClickEdit: (Brand) -> Unit,
     private val onClickDelete: (Brand) -> Unit
-) : ListAdapter<Brand, BrandAdapter.BrandViewHolder>(BrandDiffUtil()) {
+) : ListAdapter<Brand, BrandManagerAdapter.BrandViewHolder>(BrandManagerDiffUtil()) {
 
-    inner class BrandViewHolder(
-        private val binding: BrandManagerItemLayoutBinding,
+    class BrandViewHolder(
+        private val binding: ItemBrandManagerLayoutBinding,
         private val onClickEdit: (Brand) -> Unit,
         private val onClickDelete: (Brand) -> Unit
     ) :
         ViewHolder(binding.root) {
         fun bind(brand: Brand) {
-            val bitmap =
-                BitmapFactory.decodeByteArray(brand.brandLogo, 0, brand.brandLogo.size)
-            binding.imgBrand.setImageBitmap(bitmap)
             binding.tvBrandName.text = brand.brandName
+            brand.brandLogo.let {
+                binding.imgBrand.setImageBitmap(it)
+            }
 
             binding.imgEdit.setOnClickListener {
-                onClickEdit(brand)
+                onClickEdit.invoke(brand)
             }
 
             binding.imgDelete.setOnClickListener {
-                onClickDelete(brand)
+                onClickDelete.invoke(brand)
             }
-
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrandViewHolder {
-        val binding = BrandManagerItemLayoutBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = ItemBrandManagerLayoutBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return BrandViewHolder(binding, onClickEdit, onClickDelete)
     }
 
@@ -48,7 +50,7 @@ class BrandAdapter(
     }
 }
 
-class BrandDiffUtil : DiffUtil.ItemCallback<Brand>() {
+class BrandManagerDiffUtil : DiffUtil.ItemCallback<Brand>() {
     override fun areItemsTheSame(oldItem: Brand, newItem: Brand): Boolean {
         return oldItem.brandId == newItem.brandId
     }
