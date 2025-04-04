@@ -22,8 +22,8 @@ interface ProductDAO {
     @Update
     suspend fun updateProduct(product: Product)
 
-    @Query("SELECT * FROM product WHERE productName LIKE :productName")
-    fun searchProduct(productName: String): LiveData<List<Product>>
+    @Query("SELECT * FROM product WHERE productName LIKE :searchQuery")
+    fun searchProducts(searchQuery: String): LiveData<List<Product>>
 
     @Query("SELECT * FROM product")
     fun getAllProduct(): LiveData<List<Product>>

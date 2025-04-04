@@ -6,11 +6,8 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
 import androidx.room.Update
-import com.example.shoesshopapp.model.data.Product
 import com.example.shoesshopapp.model.data.ProductSize
-import com.example.shoesshopapp.model.data.relationship.ProductWithSizes
 
 @Dao
 interface ProductSizeDAO {
@@ -32,8 +29,5 @@ interface ProductSizeDAO {
     @Query("SELECT * FROM product_size WHERE productId = :productId")
     fun getProductSizeByProductId(productId: Int): LiveData<List<ProductSize>>
 
-    @Transaction
-    @Query("SELECT * FROM product_size WHERE productId = :productId")
-    suspend fun getProductSizeWithProductId(productId: Int): List<ProductWithSizes>
 
 }

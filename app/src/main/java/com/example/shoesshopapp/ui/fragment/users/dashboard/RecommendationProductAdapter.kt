@@ -22,7 +22,6 @@ class RecommendationProductAdapter :
             binding.tvProductName.text = product.productName
             binding.tvProductPrice.text = product.price.toString()
         }
-
     }
 
     override fun onCreateViewHolder(

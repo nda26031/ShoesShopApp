@@ -123,34 +123,43 @@
                     app:layout_constraintTop_toTopOf="@+id/tvTitleProductPrice" />
 
                 <Button
-                    android:id="@+id/btnUpdate"
+                    android:id="@+id/btnAddToCart"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:background="@drawable/btn_let_go"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Update"
+                    android:paddingHorizontal="20dp"
+                    android:text="Add to Cart"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <Button
-                    android:id="@+id/btnDelete"
+                <CheckBox
+                    android:id="@+id/cbFavourite"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:background="@drawable/btn_let_go"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="Delete"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/btnUpdate" />
+                    app:layout_constraintStart_toEndOf="@+id/btnAddToCart"
+                    app:layout_constraintTop_toTopOf="@+id/btnAddToCart" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Favourite"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cbFavourite"
+                    app:layout_constraintTop_toTopOf="@+id/cbFavourite" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.cardview.widget.CardView>
 

@@ -26,7 +26,7 @@ interface BrandDAO {
     @Query("SELECT * FROM brand WHERE brandId = :id")
     fun getBrandById(id: Int): LiveData<Brand>
 
-    @Query("SELECT * FROM brand WHERE brand_name LIKE '%' || :searchQuery || '%'")
+    @Query("SELECT * FROM brand WHERE brand_name LIKE :searchQuery")
     fun searchBrands(searchQuery: String): LiveData<List<Brand>>
 //
 //    @Transaction
