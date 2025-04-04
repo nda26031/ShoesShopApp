@@ -1,7 +1,6 @@
 package com.example.shoesshopapp.model.database.roomdatabase
 
 import android.content.Context
-import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -20,6 +19,7 @@ import com.example.shoesshopapp.model.database.dao.AdminDAO
 import com.example.shoesshopapp.model.database.dao.BrandDAO
 import com.example.shoesshopapp.model.database.dao.FavouriteProductDAO
 import com.example.shoesshopapp.model.database.dao.ProductDAO
+import com.example.shoesshopapp.model.database.dao.ProductSizeDAO
 import com.example.shoesshopapp.model.database.dao.UserDAO
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,6 +44,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getAdminDao(): AdminDAO
     abstract fun getBrandDao(): BrandDAO
     abstract fun getProductDao(): ProductDAO
+    abstract fun getProductSizeDao(): ProductSizeDAO
     abstract fun getFavouriteProductDao(): FavouriteProductDAO
 
 
@@ -56,7 +57,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "app_database5"
+                    "app_database"
                 ).addCallback(roomDatabaseCallback)
                     .build()
                 INSTANCE = instance

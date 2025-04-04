@@ -30,10 +30,12 @@ class ProductManagerFragment : Fragment() {
 
     private val productManagerAdapter: ProductManagerAdapter by lazy {
         ProductManagerAdapter(
+            onClickItem = { product -> onClickItem(product) },
             onClickEdit = { product -> onClickEdit(product) },
             onClickDelete = { product -> onClickDelete(product) }
         )
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +64,14 @@ class ProductManagerFragment : Fragment() {
         productManagerViewModel.getAllBrands().observe(viewLifecycleOwner) { products ->
             productManagerAdapter.submitList(products)
         }
+    }
+
+    private fun onClickItem(product: Product) {
+        val bundle = Bundle()
+        bundle.putInt("productId", product.productId)
+        val sizeManagerFragment = SizeManagerFragment()
+        sizeManagerFragment.arguments = bundle
+        replaceFragment(sizeManagerFragment)
     }
 
     private fun onClickEdit(product: Product) {

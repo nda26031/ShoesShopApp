@@ -9,12 +9,14 @@ import com.example.shoesshopapp.databinding.ItemProductManagerLayoutBinding
 import com.example.shoesshopapp.model.data.Product
 
 class ProductManagerAdapter(
+    private val onClickItem: (Product) -> Unit,
     private val onClickEdit: (Product) -> Unit,
     private val onClickDelete: (Product) -> Unit,
 ) :
     ListAdapter<Product, ProductManagerAdapter.ProductMangerViewHolder>(ProductManagerDiffUtil()) {
     class ProductMangerViewHolder(
         private val binding: ItemProductManagerLayoutBinding,
+        private val onClickItem: (Product) -> Unit,
         private val onClickEdit: (Product) -> Unit,
         private val onClickDelete: (Product) -> Unit,
     ) :
@@ -34,6 +36,10 @@ class ProductManagerAdapter(
             binding.btnDelete.setOnClickListener {
                 onClickDelete.invoke(product)
             }
+
+            binding.root.setOnClickListener {
+                onClickItem.invoke(product)
+            }
         }
     }
 
@@ -43,7 +49,7 @@ class ProductManagerAdapter(
             parent,
             false
         )
-        return ProductMangerViewHolder(binding, onClickEdit, onClickDelete)
+        return ProductMangerViewHolder(binding, onClickItem, onClickEdit, onClickDelete)
     }
 
     override fun onBindViewHolder(holder: ProductMangerViewHolder, position: Int) {

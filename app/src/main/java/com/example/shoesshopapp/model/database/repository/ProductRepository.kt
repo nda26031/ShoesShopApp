@@ -38,4 +38,5 @@ class ProductRepository(application: Application) {
 
     fun getAllBrands(): LiveData<List<Brand>> = brandDAO.getAllBrands()
 
+    fun getAllRecommendedProduct(): LiveData<List<Product>> = productDAO.getAllRecommendedProduct()
 }

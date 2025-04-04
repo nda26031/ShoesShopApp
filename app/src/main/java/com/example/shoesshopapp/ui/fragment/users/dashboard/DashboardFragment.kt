@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoesshopapp.R
 import com.example.shoesshopapp.databinding.FragmentDashboardBinding
@@ -16,7 +17,16 @@ import com.example.shoesshopapp.ui.fragment.users.product.ProductFragment
 class DashboardFragment : Fragment() {
 
     private lateinit var binding: FragmentDashboardBinding
-    private val officialBrandAdapter = OfficialBrandAdapter()
+
+
+    private val officialBrandAdapter: OfficialBrandAdapter by lazy {
+        OfficialBrandAdapter()
+    }
+
+    private val recommendationProductAdapter: RecommendationProductAdapter by lazy {
+        RecommendationProductAdapter()
+    }
+
     private val dashboardViewModel: DashboardViewModel by lazy {
         ViewModelProvider(
             this,
@@ -36,12 +46,11 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         setupNavigate()
         setupOfficialBrandRecyclerView()
-        dashboardViewModel.getAllBrands().observe(viewLifecycleOwner) {
-            officialBrandAdapter.submitList(it)
-        }
+        getAllBrands()
+        setupRecommendationProductRecyclerView()
+        getAllRecommendedProduct()
     }
 
     private fun setupNavigate() {
@@ -68,5 +77,22 @@ class DashboardFragment : Fragment() {
         binding.rvOfficialBrand.adapter = officialBrandAdapter
         binding.rvOfficialBrand.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+    }
+
+    private fun getAllBrands() {
+        dashboardViewModel.getAllBrands().observe(viewLifecycleOwner) {
+            officialBrandAdapter.submitList(it)
+        }
+    }
+
+    private fun setupRecommendationProductRecyclerView() {
+        binding.rvRecommendationProduct.adapter = recommendationProductAdapter
+        binding.rvRecommendationProduct.layoutManager = GridLayoutManager(context, 2)
+    }
+
+    private fun getAllRecommendedProduct() {
+        dashboardViewModel.getAllRecommendedProduct().observe(viewLifecycleOwner) {
+            recommendationProductAdapter.submitList(it)
+        }
     }
 }
