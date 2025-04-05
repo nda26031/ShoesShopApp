@@ -98,9 +98,6 @@ class ProductFragment : Fragment() {
         val bundle = Bundle()
         bundle.putInt("productId", product.productId)
         findNavController().navigate(R.id.action_userHomeFragment_to_productDetailFragment, bundle)
-//        val productDetailFragment = ProductDetailFragment()
-//        productDetailFragment.arguments = bundle
-//        replaceFragment(productDetailFragment)
     }
 
     private fun onAddToCartClick(product: Product) {

@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoesshopapp.R
 import com.example.shoesshopapp.databinding.FragmentDashboardBinding
+import com.example.shoesshopapp.model.data.Product
 import com.example.shoesshopapp.ui.fragment.users.brand.BrandFragment
 import com.example.shoesshopapp.ui.fragment.users.cart.CartFragment
 import com.example.shoesshopapp.ui.fragment.users.product.ProductFragment
+import com.example.shoesshopapp.ui.fragment.users.product.productDetail.ProductDetailFragment
 
 class DashboardFragment : Fragment() {
 
@@ -24,7 +27,9 @@ class DashboardFragment : Fragment() {
     }
 
     private val recommendationProductAdapter: RecommendationProductAdapter by lazy {
-        RecommendationProductAdapter()
+        RecommendationProductAdapter(onProductClick = { product ->
+            onProductClick(product)
+        })
     }
 
     private val dashboardViewModel: DashboardViewModel by lazy {
@@ -71,6 +76,12 @@ class DashboardFragment : Fragment() {
         val fragmentTransaction = parentFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.clUserHome, fragment)
         fragmentTransaction.commit()
+    }
+
+    private fun onProductClick(product: Product) {
+        val bundle = Bundle()
+        bundle.putInt("productId", product.productId)
+        findNavController().navigate(R.id.action_userHomeFragment_to_productDetailFragment, bundle)
     }
 
     private fun setupOfficialBrandRecyclerView() {

@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoesshopapp.R
 import com.example.shoesshopapp.databinding.FragmentProductDetailBinding
+import com.example.shoesshopapp.model.data.ProductSize
 import com.example.shoesshopapp.model.data.relationship.ProductWithSizes
 
 class ProductDetailFragment : Fragment() {
@@ -23,6 +26,13 @@ class ProductDetailFragment : Fragment() {
         )[ProductDetailViewModel::class.java]
     }
 
+    private val sizeAdapter: SizeAdapter by lazy {
+        SizeAdapter(onSizeClick = { productSize ->
+            onSizeClick(productSize)
+        }
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,12 +44,12 @@ class ProductDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         arguments?.let {
             productId = it.getInt("productId")
         }
 
         getProductWithSizes(productId)
+        setupSizeAdapter()
 
         binding.ivBack.setOnClickListener {
             findNavController().navigate(R.id.action_productDetailFragment_to_userHomeFragment)
@@ -52,13 +62,24 @@ class ProductDetailFragment : Fragment() {
                 binding.tvProductName.text = productWithSizes.product.productName
                 binding.tvProductPrice.text = productWithSizes.product.price.toString()
                 binding.ivProduct.setImageBitmap(productWithSizes.product.image)
+                binding.tvProductDescription.text = productWithSizes.product.description
 
-//                setupSizeAdapter()
+                sizeAdapter.submitList(productWithSizes.sizes)
             }
     }
 
-//    private fun setupSizeAdapter(): ProductWithSizes? {
-//
-//    }
+    private fun setupSizeAdapter() {
+        binding.rvSize.adapter = sizeAdapter
+        binding.rvSize.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+    }
+
+    private fun onSizeClick(productSize: ProductSize) {
+        Toast.makeText(
+            context,
+            "Size: ${productSize.size}",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
 
 }
