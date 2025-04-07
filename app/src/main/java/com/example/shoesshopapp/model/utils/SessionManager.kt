@@ -19,10 +19,6 @@ class SessionManager(context: Context) {
         return sPref.getString("role", "user")
     }
 
-    fun isLoggedIn(): Boolean {
-        return sPref.getBoolean("isLoggedIn", false)
-    }
-
     fun logout() {
         val editor = sPref.edit()
         editor.clear()

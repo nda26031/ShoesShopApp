@@ -43,9 +43,13 @@ class LoginFragment : Fragment() {
                 if (account != null && account.email == email && account.password == password) {
                     sessionManager?.saveUser(account.username, account.role)
                     if (account.role == "admin") {
+
                         navigate(R.id.action_loginFragment_to_adminHomeFragment)
                     } else {
-                        navigate(R.id.action_loginFragment_to_userHomeFragment)
+                        val bundle = Bundle()
+                        bundle.putInt("accountId", account.id)
+                        findNavController().navigate(R.id.action_loginFragment_to_userHomeFragment, bundle)
+
                     }
                 } else {
                     Toast.makeText(context, "Sai tài khoản hoặc mật khẩu!", Toast.LENGTH_SHORT)

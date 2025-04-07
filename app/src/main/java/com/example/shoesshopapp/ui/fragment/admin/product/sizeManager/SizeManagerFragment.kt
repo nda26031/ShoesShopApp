@@ -68,12 +68,12 @@ class SizeManagerFragment : Fragment() {
             replaceFragment(ProductManagerFragment())
         }
         setupAdapter()
-        getProductSizeById(productId)
+        getProductSizeByProductId(productId)
     }
 
     private fun onEditClick(productSize: ProductSize) {
         val bundle = Bundle()
-        bundle.putString("size", productSize.size)
+        bundle.putInt("productSizeId", productSize.productSizeId)
         bundle.putInt("productId", productId)
         val updateSizeFragment = UpdateSizeFragment()
         updateSizeFragment.arguments = bundle
@@ -100,8 +100,8 @@ class SizeManagerFragment : Fragment() {
         binding.rvSize.layoutManager = LinearLayoutManager(context)
     }
 
-    private fun getProductSizeById(productId: Int){
-        sizeManagerViewModel.getProductSizeById(productId).observe(viewLifecycleOwner) {
+    private fun getProductSizeByProductId(productId: Int){
+        sizeManagerViewModel.getProductSizeByProductId(productId).observe(viewLifecycleOwner) {
             sizeManagerAdapter.submitList(it)
         }
     }

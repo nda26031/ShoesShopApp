@@ -14,6 +14,7 @@ import androidx.room.PrimaryKey
         onDelete = ForeignKey.CASCADE
     )]
 )
+
 data class Product(
     @PrimaryKey(autoGenerate = true) val productId: Int = 0,
     @ColumnInfo val productName: String,

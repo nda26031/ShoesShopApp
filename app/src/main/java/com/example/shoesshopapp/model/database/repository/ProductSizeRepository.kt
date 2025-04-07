@@ -34,9 +34,9 @@ class ProductSizeRepository(application: Application) {
         return productSizeDao.getAllProductSize()
     }
 
-    fun getProductSizeById(productSizeId: Int): LiveData<List<ProductSize>> = productSizeDao.getProductSizeByProductId(productSizeId)
+    fun getProductSizeByProductId(productId: Int): LiveData<List<ProductSize>> = productSizeDao.getProductSizeByProductId(productId)
 
-    fun getProductSize(size: String): LiveData<ProductSize> = productSizeDao.getProductSize(size)
+    fun getProductSizeById(productSizeId: Int): LiveData<ProductSize> = productSizeDao.getProductSizeById(productSizeId)
 
     fun getProductById(productId: Int): LiveData<Product> = productDao.getProductById(productId)
 }

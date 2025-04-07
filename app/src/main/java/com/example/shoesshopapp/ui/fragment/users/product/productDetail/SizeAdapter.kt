@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.shoesshopapp.R
 import com.example.shoesshopapp.databinding.ItemSizeLayoutBinding
 import com.example.shoesshopapp.model.data.ProductSize
 
@@ -14,11 +15,16 @@ class SizeAdapter(private val onSizeClick: (ProductSize) -> Unit) :
         private val binding: ItemSizeLayoutBinding,
         private val onSizeClick: (ProductSize) -> Unit
     ) : ViewHolder(binding.root) {
-        fun bind(productSizes: ProductSize) {
-            binding.tvSize.text = productSizes.size
+        fun bind(productSize: ProductSize) {
+            binding.tvSize.text = productSize.size
 
             binding.root.setOnClickListener {
-                onSizeClick(productSizes)
+                onSizeClick(productSize)
+                if (binding.root.isSelected) {
+                    binding.clSize.setBackgroundResource(R.drawable.size_checked)
+                } else {
+                    binding.clSize.setBackgroundResource(R.drawable.size_checked)
+                }
             }
         }
     }

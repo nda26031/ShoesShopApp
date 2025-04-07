@@ -23,8 +23,8 @@ interface ProductSizeDAO {
     @Query("SELECT * FROM product_size")
     fun getAllProductSize(): LiveData<List<ProductSize>>
 
-    @Query("SELECT * FROM product_size WHERE size = :size")
-    fun getProductSize(size: String): LiveData<ProductSize>
+    @Query("SELECT * FROM product_size WHERE productSizeId = :productSizeId")
+    fun getProductSizeById(productSizeId: Int): LiveData<ProductSize>
 
     @Query("SELECT * FROM product_size WHERE productId = :productId")
     fun getProductSizeByProductId(productId: Int): LiveData<List<ProductSize>>

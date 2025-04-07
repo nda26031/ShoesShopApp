@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.shoesshopapp.model.data.ProductSize
 import com.example.shoesshopapp.model.database.repository.ProductSizeRepository
-import com.example.shoesshopapp.ui.fragment.admin.product.sizeManager.addSize.AddSizeViewModel
 import kotlinx.coroutines.launch
 
 class UpdateSizeViewModel(application: Application) : AndroidViewModel(application) {
@@ -20,10 +19,10 @@ class UpdateSizeViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    fun getProductSize(size: String): LiveData<ProductSize> =
-        productSizeRepository.getProductSize(size)
+    fun getProductSizeById(productSizeId: Int): LiveData<ProductSize> =
+        productSizeRepository.getProductSizeById(productSizeId)
 
-    class UpdateSizeViewModelFactory(private val application: Application):
+    class UpdateSizeViewModelFactory(private val application: Application) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(UpdateSizeViewModel::class.java)) return UpdateSizeViewModel(

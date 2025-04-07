@@ -47,7 +47,6 @@ class ProductDetailFragment : Fragment() {
         arguments?.let {
             productId = it.getInt("productId")
         }
-
         getProductWithSizes(productId)
         setupSizeAdapter()
 

@@ -1,13 +1,16 @@
 package com.example.shoesshopapp.ui.fragment.users
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.shoesshopapp.R
 import com.example.shoesshopapp.databinding.FragmentAdminHomeBinding
 import com.example.shoesshopapp.databinding.FragmentUserHomeBinding
+import com.example.shoesshopapp.model.utils.SessionManager
 import com.example.shoesshopapp.ui.fragment.admin.brand.BrandManagerFragment
 import com.example.shoesshopapp.ui.fragment.users.account.AccountFragment
 import com.example.shoesshopapp.ui.fragment.users.brand.BrandFragment
@@ -21,40 +24,55 @@ import com.example.shoesshopapp.ui.fragment.users.product.ProductFragment
 class UserHomeFragment : Fragment() {
 
     private lateinit var binding: FragmentUserHomeBinding
+    private var accountId: Int = -1
+    private var userId: Int = -1
+
+    private val userHomeViewModel: UserHomeViewModel by lazy {
+        ViewModelProvider(
+            this, UserHomeViewModel.UserHomeViewModelFactory(requireActivity().application)
+        )[UserHomeViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        arguments?.let {
+            accountId = it.getInt("accountId")
+        }
+        getUserByAccount(accountId)
         binding = FragmentUserHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        replaceFragment(DashboardFragment())
-
 
         binding.bottomNav.setOnItemSelectedListener {
+
             when (it.itemId) {
                 R.id.dashboard -> {
-                    replaceFragment(DashboardFragment())
+                    binding.tvUserHomeTitle.visibility = View.GONE
+                    replaceDashboardFragment()
                     true
                 }
 
                 R.id.brand -> {
+                    binding.tvUserHomeTitle.visibility = View.GONE
                     replaceFragment(BrandFragment())
                     true
                 }
 
                 R.id.product -> {
+                    binding.tvUserHomeTitle.visibility = View.GONE
                     replaceFragment(ProductFragment())
                     true
                 }
 
                 R.id.order -> {
-                    replaceFragment(OrderFragment())
+                    binding.tvUserHomeTitle.visibility = View.GONE
+                    replaceOrderFragment()
                     true
                 }
 
@@ -66,7 +84,13 @@ class UserHomeFragment : Fragment() {
                 else -> false
             }
         }
+    }
 
+    private fun getUserByAccount(accountId: Int) {
+        userHomeViewModel.getUserByAccount(accountId).observe(viewLifecycleOwner) { user ->
+            userId = user.userId
+            Log.d("userId in getUserByAccount ", userId.toString())
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -75,4 +99,21 @@ class UserHomeFragment : Fragment() {
         fragmentTransaction.commit()
     }
 
+    private fun replaceDashboardFragment() {
+        val bundle = Bundle()
+        bundle.putInt("userId", userId)
+        Log.d("userId in userHome ", userId.toString())
+        val dashboardFragment = DashboardFragment()
+        dashboardFragment.arguments = bundle
+        replaceFragment(dashboardFragment)
+    }
+
+    private fun replaceOrderFragment() {
+        val bundle = Bundle()
+        bundle.putInt("userId", userId)
+        Log.d("userId in userHome ", userId.toString())
+        val orderFragment = OrderFragment()
+        orderFragment.arguments = bundle
+        replaceFragment(orderFragment)
+    }
 }
