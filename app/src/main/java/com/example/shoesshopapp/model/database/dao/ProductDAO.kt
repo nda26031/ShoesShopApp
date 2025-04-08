@@ -38,4 +38,8 @@ interface ProductDAO {
     @Transaction
     @Query("SELECT * FROM product WHERE productId = :productId")
     fun getProductWithSizes(productId: Int): LiveData<ProductWithSizes>
+
+    @Transaction
+    @Query("SELECT * FROM product WHERE productId = :productId")
+    fun getProductWithAvailableSizes(productId: Int): LiveData<ProductWithSizes>
 }

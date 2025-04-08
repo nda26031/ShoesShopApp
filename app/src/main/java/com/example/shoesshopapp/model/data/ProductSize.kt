@@ -2,7 +2,6 @@ package com.example.shoesshopapp.model.data
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
@@ -12,11 +11,12 @@ import androidx.room.PrimaryKey
         childColumns = ["productId"],
         onDelete = ForeignKey.CASCADE
     )],
-//    primaryKeys = ["productId", "size"],
 )
 data class ProductSize(
-    @PrimaryKey(autoGenerate = true) val productSizeId: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val productSizeId: Int = 0,
     val productId: Int,
     val size: String,
     val quantity: Int,
+    var isSelect: Boolean = false
 )

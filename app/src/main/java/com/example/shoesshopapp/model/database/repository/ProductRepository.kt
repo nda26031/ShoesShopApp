@@ -2,6 +2,7 @@ package com.example.shoesshopapp.model.database.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.example.shoesshopapp.model.data.Brand
 import com.example.shoesshopapp.model.data.Product
 import com.example.shoesshopapp.model.data.relationship.ProductWithSizes
@@ -42,6 +43,14 @@ class ProductRepository(application: Application) {
     fun getAllRecommendedProduct(): LiveData<List<Product>> = productDAO.getAllRecommendedProduct()
 
     fun getProductWithSizes(productId:Int):LiveData<ProductWithSizes> = productDAO.getProductWithSizes(productId)
+
+    fun getProductWithAvailableSizes(productId: Int): LiveData<ProductWithSizes> {
+        return productDAO.getProductWithSizes(productId).map { productWithSizes ->
+            productWithSizes.copy(
+                sizes = productWithSizes.sizes.filter { it.quantity > 0 }
+            )
+        }
+    }
 
     fun searchProducts(searchQuery: String): LiveData<List<Product>> =
         productDAO.searchProducts("%$searchQuery%")

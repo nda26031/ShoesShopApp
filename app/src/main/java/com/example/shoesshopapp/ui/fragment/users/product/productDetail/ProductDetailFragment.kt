@@ -1,6 +1,7 @@
 package com.example.shoesshopapp.ui.fragment.users.product.productDetail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -56,7 +57,7 @@ class ProductDetailFragment : Fragment() {
     }
 
     private fun getProductWithSizes(productId: Int) {
-        productDetailViewModel.getProductWithSizes(productId)
+        productDetailViewModel.getProductWithAvailableSizes(productId)
             .observe(viewLifecycleOwner) { productWithSizes ->
                 binding.tvProductName.text = productWithSizes.product.productName
                 binding.tvProductPrice.text = productWithSizes.product.price.toString()
@@ -74,11 +75,12 @@ class ProductDetailFragment : Fragment() {
     }
 
     private fun onSizeClick(productSize: ProductSize) {
-        Toast.makeText(
-            context,
-            "Size: ${productSize.size}",
-            Toast.LENGTH_SHORT
-        ).show()
+        productDetailViewModel.selectSingleProductSize(productSize)
+        Log.d("ProductDetailFragment", "Selected size: ${productSize.size}")
+        Log.d(
+            "ProductDetailFragment",
+            "Selected size ID: ${productSize.productSizeId}"
+        )
     }
 
 }

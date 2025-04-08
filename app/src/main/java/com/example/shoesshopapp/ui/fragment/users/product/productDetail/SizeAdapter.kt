@@ -17,14 +17,11 @@ class SizeAdapter(private val onSizeClick: (ProductSize) -> Unit) :
     ) : ViewHolder(binding.root) {
         fun bind(productSize: ProductSize) {
             binding.tvSize.text = productSize.size
-
+            binding.clSize.setBackgroundResource(
+                if (productSize.isSelect) R.drawable.size_checked else R.drawable.size_unchecked
+            )
             binding.root.setOnClickListener {
-                onSizeClick(productSize)
-                if (binding.root.isSelected) {
-                    binding.clSize.setBackgroundResource(R.drawable.size_checked)
-                } else {
-                    binding.clSize.setBackgroundResource(R.drawable.size_checked)
-                }
+                onSizeClick.invoke(productSize)
             }
         }
     }

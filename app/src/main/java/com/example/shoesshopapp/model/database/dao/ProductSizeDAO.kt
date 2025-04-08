@@ -6,6 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.example.shoesshopapp.model.data.ProductSize
 
@@ -29,5 +30,28 @@ interface ProductSizeDAO {
     @Query("SELECT * FROM product_size WHERE productId = :productId")
     fun getProductSizeByProductId(productId: Int): LiveData<List<ProductSize>>
 
+    @Query("UPDATE product_size SET isSelect = :isSelected WHERE productSizeId = :productSizeId")
+    suspend fun setSelectProductSize(productSizeId: Int, isSelected: Boolean)
 
+    @Query("UPDATE product_size SET isSelect = 0 WHERE productId = :productId")
+    suspend fun deselectAllSizesForProduct(productId: Int)
+
+    @Transaction
+    suspend fun selectSingleSize(productId: Int, productSizeId: Int) {
+        deselectAllSizesForProduct(productId)
+        setSelectProductSize(productSizeId, true)
+    }
+
+//    @Query("UPDATE product_size SET isSelect = 0")
+//    suspend fun clearAllFavorites()
+
+//    @Query("UPDATE product_size SET isSelect = 1 WHERE productSizeId = :productSizeId")
+//    suspend fun setSelectProductSize(productSizeId: Int) {
+//        clearAllFavorites()
+//        val productSize = getProductSizeById(productSizeId)
+//        productSize.value?.let {productSize ->
+//            productSize.isSelect = true
+//            updateProductSize(it)
+//        }
+//    }
 }
