@@ -8,7 +8,8 @@ import com.example.shoesshopapp.model.data.CartItem
 data class CartWithCartItems(
     @Embedded val cart: Cart,
     @Relation(
+        entity = CartItem::class,
         parentColumn = "cartId",
         entityColumn = "cartId"
-    ) val cartItems: List<CartItem>
+    ) val cartItems: List<CartItemWithDetails>
 )

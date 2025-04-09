@@ -13,4 +13,5 @@ interface UserDAO {
 
     @Query("SELECT * FROM users WHERE accountId = :accountId")
     fun getUserByAccount(accountId: Int): LiveData<User>
+
 }

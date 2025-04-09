@@ -32,5 +32,5 @@ data class CartItem(
     val cartId: Int,
     val productId: Int,
     val productSizeId: Int,
-    val quantity: Int
+    val quantity: Int = 1
 )

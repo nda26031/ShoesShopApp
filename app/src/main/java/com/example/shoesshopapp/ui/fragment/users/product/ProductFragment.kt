@@ -1,6 +1,7 @@
 package com.example.shoesshopapp.ui.fragment.users.product
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.example.shoesshopapp.ui.fragment.users.product.productDetail.ProductD
 class ProductFragment : Fragment() {
 
     private lateinit var binding: FragmentProductBinding
+    private var userId: Int = -1
 
     private val productViewModel: ProductViewModel by lazy {
         ViewModelProvider(
@@ -31,9 +33,6 @@ class ProductFragment : Fragment() {
         ProductAdapter(
             onItemClick = { product ->
                 onItemClick(product)
-            },
-            onAddToCartClick = { product ->
-                onAddToCartClick(product)
             },
             onFavoriteClick = { product ->
                 onFavoriteClick(product)
@@ -52,6 +51,12 @@ class ProductFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        arguments?.let {
+            userId = it.getInt("userId")
+            Log.d("userId in userHome ", userId.toString())
+        }
+
         setupProductAdapter()
         getAllProducts()
         setupSearchView()
@@ -97,15 +102,8 @@ class ProductFragment : Fragment() {
     private fun onItemClick(product: Product) {
         val bundle = Bundle()
         bundle.putInt("productId", product.productId)
+        bundle.putInt("userId", userId)
         findNavController().navigate(R.id.action_userHomeFragment_to_productDetailFragment, bundle)
-    }
-
-    private fun onAddToCartClick(product: Product) {
-        Toast.makeText(
-            requireContext(),
-            "${product.productName} added to cart",
-            Toast.LENGTH_SHORT
-        ).show()
     }
 
     private fun onFavoriteClick(product: Product) {
@@ -115,12 +113,5 @@ class ProductFragment : Fragment() {
             Toast.LENGTH_SHORT
         ).show()
     }
-
-    private fun replaceFragment(fragment: Fragment) {
-        val fragmentTransaction = parentFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.clAdminHome, fragment)
-        fragmentTransaction.commit()
-    }
-
 
 }

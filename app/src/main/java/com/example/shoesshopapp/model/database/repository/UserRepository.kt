@@ -14,5 +14,5 @@ class UserRepository(application: Application) {
         userDao = database.getUserDao()
     }
 
-    fun getUserByAccount(accountId: Int):LiveData<User> = userDao.getUserByAccount(accountId)
+    fun getUserByAccount(accountId: Int): LiveData<User> = userDao.getUserByAccount(accountId)
 }

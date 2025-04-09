@@ -23,7 +23,7 @@ class RecommendationProductAdapter(private val onProductClick: (Product) -> Unit
                 binding.ivProduct.setImageBitmap(it)
             }
             binding.tvProductName.text = product.productName
-            binding.tvProductPrice.text = product.price.toString()
+            binding.tvProductPrice.text = String.format("%.0f", product.price)
 
             binding.root.setOnClickListener {
                 onProductClick(product)

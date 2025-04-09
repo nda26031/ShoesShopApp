@@ -10,13 +10,11 @@ import com.example.shoesshopapp.model.data.Product
 
 class ProductAdapter(
     private val onItemClick: (Product) -> Unit,
-    private val onAddToCartClick: (Product) -> Unit,
     private val onFavoriteClick: (Product) -> Unit
 ) : ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffUtil()) {
     class ProductViewHolder(
         private val binding: ItemProductLayoutBinding,
         private val onItemClick: (Product) -> Unit,
-        private val onAddToCartClick: (Product) -> Unit,
         private val onFavoriteClick: (Product) -> Unit
     ) :
         ViewHolder(binding.root) {
@@ -24,7 +22,7 @@ class ProductAdapter(
             binding.apply {
                 tvProductName.text = product.productName
                 tvProductBrand.text = product.brandName
-                tvProductPrice.text = product.price.toString()
+                tvProductPrice.text = String.format("%.0f", product.price)
                 ivProduct.setImageBitmap(product.image)
             }
 
@@ -32,11 +30,7 @@ class ProductAdapter(
                 onItemClick(product)
             }
 
-            binding.btnAddToCart.setOnClickListener {
-                onAddToCartClick(product)
-            }
-
-            binding.cbFavourite.setOnClickListener {
+            binding.ivFavourite.setOnClickListener {
                 onFavoriteClick(product)
             }
         }
@@ -46,7 +40,7 @@ class ProductAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding =
             ItemProductLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ProductViewHolder(binding, onItemClick, onAddToCartClick, onFavoriteClick)
+        return ProductViewHolder(binding, onItemClick, onFavoriteClick)
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {

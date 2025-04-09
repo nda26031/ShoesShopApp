@@ -43,4 +43,8 @@ class ProductSizeRepository(application: Application) {
     suspend fun selectSingleProductSize(productSize: ProductSize) {
         productSizeDao.selectSingleSize(productSize.productId, productSize.productSizeId)
     }
+
+    suspend fun deselectAllSizesForProduct(productId: Int){
+        productSizeDao.deselectAllSizesForProduct(productId)
+    }
 }

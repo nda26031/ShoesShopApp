@@ -54,7 +54,7 @@ class UserHomeFragment : Fragment() {
             when (it.itemId) {
                 R.id.dashboard -> {
                     binding.tvUserHomeTitle.visibility = View.GONE
-                    replaceDashboardFragment()
+                    replaceFavouriteWithUserId(DashboardFragment())
                     true
                 }
 
@@ -66,13 +66,13 @@ class UserHomeFragment : Fragment() {
 
                 R.id.product -> {
                     binding.tvUserHomeTitle.visibility = View.GONE
-                    replaceFragment(ProductFragment())
+                    replaceFavouriteWithUserId(ProductFragment())
                     true
                 }
 
                 R.id.order -> {
                     binding.tvUserHomeTitle.visibility = View.GONE
-                    replaceOrderFragment()
+                    replaceFavouriteWithUserId(OrderFragment())
                     true
                 }
 
@@ -99,21 +99,11 @@ class UserHomeFragment : Fragment() {
         fragmentTransaction.commit()
     }
 
-    private fun replaceDashboardFragment() {
+    private fun replaceFavouriteWithUserId(fragment: Fragment) {
         val bundle = Bundle()
         bundle.putInt("userId", userId)
         Log.d("userId in userHome ", userId.toString())
-        val dashboardFragment = DashboardFragment()
-        dashboardFragment.arguments = bundle
-        replaceFragment(dashboardFragment)
-    }
-
-    private fun replaceOrderFragment() {
-        val bundle = Bundle()
-        bundle.putInt("userId", userId)
-        Log.d("userId in userHome ", userId.toString())
-        val orderFragment = OrderFragment()
-        orderFragment.arguments = bundle
-        replaceFragment(orderFragment)
+        fragment.arguments = bundle
+        replaceFragment(fragment)
     }
 }

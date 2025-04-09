@@ -22,7 +22,7 @@ class DashboardFragment : Fragment() {
 
     private lateinit var binding: FragmentDashboardBinding
     private var userId: Int = -1
-
+    private var cartId: Int = -1
 
     private val officialBrandAdapter: OfficialBrandAdapter by lazy {
         OfficialBrandAdapter()
@@ -62,19 +62,14 @@ class DashboardFragment : Fragment() {
         getAllBrands()
         setupRecommendationProductRecyclerView()
         getAllRecommendedProduct()
+        getCart()
     }
 
     private fun setupNavigate() {
         binding.cvCart.setOnClickListener {
-            replaceFragment(CartFragment())
-        }
-
-        binding.tvSeeAllBrand.setOnClickListener {
-            replaceFragment(BrandFragment())
-        }
-
-        binding.tvSeeAllRecommendationProduct.setOnClickListener {
-            replaceFragment(ProductFragment())
+            val bundle = Bundle()
+            bundle.putInt("cartId", cartId)
+            findNavController().navigate(R.id.action_userHomeFragment_to_cartFragment, bundle)
         }
     }
 
@@ -87,6 +82,7 @@ class DashboardFragment : Fragment() {
     private fun onProductClick(product: Product) {
         val bundle = Bundle()
         bundle.putInt("productId", product.productId)
+        bundle.putInt("userId", userId)
         findNavController().navigate(R.id.action_userHomeFragment_to_productDetailFragment, bundle)
     }
 
@@ -99,6 +95,12 @@ class DashboardFragment : Fragment() {
     private fun getAllBrands() {
         dashboardViewModel.getAllBrands().observe(viewLifecycleOwner) {
             officialBrandAdapter.submitList(it)
+        }
+    }
+
+    private fun getCart() {
+        dashboardViewModel.getCartByUserId(userId).observe(viewLifecycleOwner) {
+            cartId = it.cartId
         }
     }
 

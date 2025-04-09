@@ -17,7 +17,6 @@ class OfficialBrandAdapter :
             brand.brandLogo.let {
                 binding.ivBrandLogo.setImageBitmap(it)
             }
-
         }
     }
 
