@@ -12,6 +12,7 @@ import com.example.shoesshopapp.R
 import com.example.shoesshopapp.databinding.FragmentAddSizeBinding
 import com.example.shoesshopapp.model.data.ProductSize
 import com.example.shoesshopapp.ui.fragment.admin.brand.BrandManagerFragment
+import com.example.shoesshopapp.ui.fragment.admin.product.ProductManagerFragment
 import com.example.shoesshopapp.ui.fragment.admin.product.sizeManager.SizeManagerFragment
 
 class AddSizeFragment : Fragment() {
@@ -30,7 +31,6 @@ class AddSizeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentAddSizeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -79,8 +79,7 @@ class AddSizeFragment : Fragment() {
         Toast.makeText(requireContext(), "Brand added successfully", Toast.LENGTH_SHORT).show()
         clearForm()
 
-        replaceFragment(SizeManagerFragment())
-
+        replaceFragment(ProductManagerFragment())
     }
 
     private fun clearForm() {

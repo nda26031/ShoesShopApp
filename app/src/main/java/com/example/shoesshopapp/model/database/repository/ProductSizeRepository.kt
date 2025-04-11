@@ -30,13 +30,21 @@ class ProductSizeRepository(application: Application) {
         productSizeDao.updateProductSize(productSize)
     }
 
-    fun getAllProductSize(): LiveData<List<ProductSize>> {
-        return productSizeDao.getAllProductSize()
-    }
+    fun getProductSizeByProductId(productId: Int): LiveData<List<ProductSize>> = productSizeDao.getProductSizeByProductId(productId)
 
-    fun getProductSizeById(productSizeId: Int): LiveData<List<ProductSize>> = productSizeDao.getProductSizeByProductId(productSizeId)
-
-    fun getProductSize(size: String): LiveData<ProductSize> = productSizeDao.getProductSize(size)
+    fun getProductSizeById(productSizeId: Int): LiveData<ProductSize> = productSizeDao.getProductSizeById(productSizeId)
 
     fun getProductById(productId: Int): LiveData<Product> = productDao.getProductById(productId)
+
+//    suspend fun setSelectProductSize(productSizeId: Int) {
+//        productSizeDao.setSelectProductSize(productSizeId)
+//    }
+
+    suspend fun selectSingleProductSize(productSize: ProductSize) {
+        productSizeDao.selectSingleSize(productSize.productId, productSize.productSizeId)
+    }
+
+    suspend fun deselectAllSizesForProduct(productId: Int){
+        productSizeDao.deselectAllSizesForProduct(productId)
+    }
 }

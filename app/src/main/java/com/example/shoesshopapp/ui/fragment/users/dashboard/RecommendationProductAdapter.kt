@@ -8,11 +8,14 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.shoesshopapp.databinding.ItemRecommendedProductLayoutBinding
 import com.example.shoesshopapp.model.data.Product
 
-class RecommendationProductAdapter :
+class RecommendationProductAdapter(private val onProductClick: (Product) -> Unit) :
     ListAdapter<Product, RecommendationProductAdapter.RecommendationProductViewHolder>(
         RecommendationProductDiffUtil()
     ) {
-    class RecommendationProductViewHolder(private val binding: ItemRecommendedProductLayoutBinding) :
+    class RecommendationProductViewHolder(
+        private val binding: ItemRecommendedProductLayoutBinding,
+        private val onProductClick: (Product) -> Unit
+    ) :
         ViewHolder(binding.root) {
 
         fun bind(product: Product) {
@@ -20,9 +23,12 @@ class RecommendationProductAdapter :
                 binding.ivProduct.setImageBitmap(it)
             }
             binding.tvProductName.text = product.productName
-            binding.tvProductPrice.text = product.price.toString()
-        }
+            binding.tvProductPrice.text = String.format("%.0f", product.price)
 
+            binding.root.setOnClickListener {
+                onProductClick(product)
+            }
+        }
     }
 
     override fun onCreateViewHolder(
@@ -34,7 +40,7 @@ class RecommendationProductAdapter :
             parent,
             false
         )
-        return RecommendationProductViewHolder(binding)
+        return RecommendationProductViewHolder(binding, onProductClick)
     }
 
     override fun onBindViewHolder(holder: RecommendationProductViewHolder, position: Int) {

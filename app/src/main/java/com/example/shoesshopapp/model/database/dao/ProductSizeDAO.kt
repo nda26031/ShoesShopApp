@@ -8,9 +8,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.example.shoesshopapp.model.data.Product
 import com.example.shoesshopapp.model.data.ProductSize
-import com.example.shoesshopapp.model.data.relationship.ProductWithSizes
 
 @Dao
 interface ProductSizeDAO {
@@ -26,14 +24,24 @@ interface ProductSizeDAO {
     @Query("SELECT * FROM product_size")
     fun getAllProductSize(): LiveData<List<ProductSize>>
 
-    @Query("SELECT * FROM product_size WHERE size = :size")
-    fun getProductSize(size: String): LiveData<ProductSize>
+    @Query("SELECT * FROM product_size WHERE productSizeId = :productSizeId")
+    fun getProductSizeById(productSizeId: Int): LiveData<ProductSize>
 
     @Query("SELECT * FROM product_size WHERE productId = :productId")
     fun getProductSizeByProductId(productId: Int): LiveData<List<ProductSize>>
 
-    @Transaction
-    @Query("SELECT * FROM product_size WHERE productId = :productId")
-    suspend fun getProductSizeWithProductId(productId: Int): List<ProductWithSizes>
+    @Query("UPDATE product_size SET isSelect = :isSelected WHERE productSizeId = :productSizeId")
+    suspend fun setSelectProductSize(productSizeId: Int, isSelected: Boolean)
 
+    @Query("UPDATE product_size SET isSelect = 0 WHERE productId = :productId")
+    suspend fun deselectAllSizesForProduct(productId: Int)
+
+    @Transaction
+    suspend fun selectSingleSize(productId: Int, productSizeId: Int) {
+        deselectAllSizesForProduct(productId)
+        setSelectProductSize(productSizeId, true)
+    }
+
+    @Query("UPDATE product_size SET quantity = quantity - :quantity WHERE productSizeId = :productSizeId")
+    suspend fun updateProductSizeQuantity(productSizeId: Int, quantity: Int)
 }

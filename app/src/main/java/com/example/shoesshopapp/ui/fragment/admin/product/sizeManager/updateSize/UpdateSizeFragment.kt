@@ -17,7 +17,7 @@ import com.example.shoesshopapp.ui.fragment.admin.product.sizeManager.SizeManage
 class UpdateSizeFragment : Fragment() {
 
     private lateinit var binding: FragmentUpdateSizeBinding
-    private var size: String = ""
+    private var productSizeId: Int = -1
     private var productId: Int = -1
 
     private val updateSizeViewModel: UpdateSizeViewModel by lazy {
@@ -40,10 +40,10 @@ class UpdateSizeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
-            size = it.getString("size").toString()
+            productSizeId = it.getInt("productSizeId")
             productId = it.getInt("productId")
-            Log.d("UpdateSizeFragment", "Size: $size, Product ID: $productId")
-            getProductSize(size)
+            Log.d("UpdateSizeFragment", "Product Size ID: $productSizeId")
+            getProductSizeById(productSizeId)
         }
 
         binding.ivBack.setOnClickListener {
@@ -73,17 +73,21 @@ class UpdateSizeFragment : Fragment() {
             return
         }
 
-        val productSize = ProductSize(productId = productId, size = size, quantity = quantity)
+        val productSize = ProductSize(
+            productSizeId = productSizeId,
+            productId = productId,
+            size = size,
+            quantity = quantity)
 
         updateSizeViewModel.updateProductSize(productSize)
         Toast.makeText(requireContext(), "Size updated successfully", Toast.LENGTH_SHORT).show()
         clearForm()
 
-        replaceFragment(SizeManagerFragment())
+        replaceFragment(ProductManagerFragment())
     }
 
-    private fun getProductSize(size: String) {
-        updateSizeViewModel.getProductSize(size).observe(viewLifecycleOwner) {
+    private fun getProductSizeById(productSizeId: Int) {
+        updateSizeViewModel.getProductSizeById(productSizeId).observe(viewLifecycleOwner) {
             binding.edtSize.setText(it.size)
             binding.edtQuantity.setText(it.quantity.toString())
         }

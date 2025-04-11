@@ -75,18 +75,18 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
-    <TextView
-        android:id="@+id/tvSeeAllBrand"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_regular"
-        android:text="See all"
-        android:textAlignment="textEnd"
-        android:textColor="@color/gray"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/guideline2" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvSeeAllBrand"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:fontFamily="@font/poppins_regular"-->
+    <!--        android:text="See all"-->
+    <!--        android:textAlignment="textEnd"-->
+    <!--        android:textColor="@color/gray"-->
+    <!--        android:textSize="16sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/guideline2" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvOfficialBrand"
@@ -107,18 +107,18 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/rvOfficialBrand" />
 
-    <TextView
-        android:id="@+id/tvSeeAllRecommendationProduct"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_regular"
-        android:text="See all"
-        android:textAlignment="textEnd"
-        android:textColor="@color/gray"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/rvOfficialBrand" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvSeeAllRecommendationProduct"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:fontFamily="@font/poppins_regular"-->
+    <!--        android:text="See all"-->
+    <!--        android:textAlignment="textEnd"-->
+    <!--        android:textColor="@color/gray"-->
+    <!--        android:textSize="16sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/rvOfficialBrand" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecommendationProduct"

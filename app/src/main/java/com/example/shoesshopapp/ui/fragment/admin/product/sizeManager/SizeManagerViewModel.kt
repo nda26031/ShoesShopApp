@@ -26,12 +26,8 @@ class SizeManagerViewModel(application: Application) : AndroidViewModel(applicat
     fun getProductById(productId: Int): LiveData<Product> =
         productSizeRepository.getProductById(productId)
 
-    fun getAllProductSize(): LiveData<List<ProductSize>> =
-        productSizeRepository.getAllProductSize()
-
-
-    fun getProductSizeById(productId: Int): LiveData<List<ProductSize>> =
-        productSizeRepository.getProductSizeById(productId)
+    fun getProductSizeByProductId(productId: Int): LiveData<List<ProductSize>> =
+        productSizeRepository.getProductSizeByProductId(productId)
 
     class SizeManagerViewModelFactory(private val application: Application) :
         ViewModelProvider.Factory {

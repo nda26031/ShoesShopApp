@@ -2,8 +2,10 @@ package com.example.shoesshopapp.model.database.repository
 
 import android.app.Application
 import com.example.shoesshopapp.model.data.Account
+import com.example.shoesshopapp.model.data.Cart
 import com.example.shoesshopapp.model.data.User
 import com.example.shoesshopapp.model.database.dao.AccountDAO
+import com.example.shoesshopapp.model.database.dao.CartDAO
 import com.example.shoesshopapp.model.database.dao.UserDAO
 import com.example.shoesshopapp.model.database.roomdatabase.AppDatabase
 import kotlinx.coroutines.Dispatchers
@@ -14,11 +16,13 @@ class AccountRepository(
 ) {
     private var accountDao: AccountDAO
     private var userDao: UserDAO
+    private var cartDAO: CartDAO
 
     init {
         val database = AppDatabase.getDatabase(application)
         accountDao = database.getAccountDao()
         userDao = database.getUserDao()
+        cartDAO = database.getCartDao()
     }
 
     suspend fun registerAccount(
@@ -30,9 +34,7 @@ class AccountRepository(
         phone: String
     ): Boolean {
         return withContext(Dispatchers.IO) {
-
             val emailExist = accountDao.isEmailExist(email) > 0
-
             if (!emailExist) {
                 val accountId = accountDao.insertAccount(
                     Account(
@@ -43,12 +45,18 @@ class AccountRepository(
                     )
                 ).toInt()
                 // Lưu thông tin người dùng vào bảng User
-                userDao.insertUser(
+                val userId = userDao.insertUser(
                     User(
                         accountId = accountId,
                         fullName = fullName,
                         address = address,
                         phone = phone
+                    )
+                ).toInt()
+                // Tạo giỏ hàng cho người dùng
+                cartDAO.insertCart(
+                    Cart(
+                        userId = userId,
                     )
                 )
                 return@withContext true // Registration successful

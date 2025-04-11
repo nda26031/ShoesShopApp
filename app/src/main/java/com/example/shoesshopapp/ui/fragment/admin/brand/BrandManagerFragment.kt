@@ -67,13 +67,6 @@ class BrandManagerFragment : Fragment() {
         }
     }
 
-    private fun searchBrand(query: String) {
-        val searchQuery = "%$query%"
-        brandManagerViewModel.searchBrands(searchQuery).observe(viewLifecycleOwner) {
-            brandAdapter.submitList(it)
-        }
-    }
-
     private fun onClickEdit(brand: Brand) {
         val bundle = Bundle()
         bundle.putInt("brandId", brand.brandId)

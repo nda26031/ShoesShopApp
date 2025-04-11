@@ -64,6 +64,9 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/adminHomeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_orderManagerDetailFragment"
+            app:destination="@id/orderManagerDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/userHomeFragment"
@@ -75,5 +78,34 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/userHomeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_userHomeFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_userHomeFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_userHomeFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.shoesshopapp.ui.fragment.users.product.productDetail.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.shoesshopapp.ui.fragment.users.cart.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="com.example.shoesshopapp.ui.fragment.users.order.oderDetail.OrderDetailFragment"
+        android:label="fragment_order_detail"
+        tools:layout="@layout/fragment_order_detail" />
+    <fragment
+        android:id="@+id/orderManagerDetailFragment"
+        android:name="com.example.shoesshopapp.ui.fragment.admin.order.orderManagerDetail.OrderManagerDetailFragment"
+        android:label="fragment_order_manager_detail"
+        tools:layout="@layout/fragment_order_manager_detail" />
 </navigation>
