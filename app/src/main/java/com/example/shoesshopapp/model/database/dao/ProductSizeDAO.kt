@@ -42,16 +42,6 @@ interface ProductSizeDAO {
         setSelectProductSize(productSizeId, true)
     }
 
-//    @Query("UPDATE product_size SET isSelect = 0")
-//    suspend fun clearAllFavorites()
-
-//    @Query("UPDATE product_size SET isSelect = 1 WHERE productSizeId = :productSizeId")
-//    suspend fun setSelectProductSize(productSizeId: Int) {
-//        clearAllFavorites()
-//        val productSize = getProductSizeById(productSizeId)
-//        productSize.value?.let {productSize ->
-//            productSize.isSelect = true
-//            updateProductSize(it)
-//        }
-//    }
+    @Query("UPDATE product_size SET quantity = quantity - :quantity WHERE productSizeId = :productSizeId")
+    suspend fun updateProductSizeQuantity(productSizeId: Int, quantity: Int)
 }

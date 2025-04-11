@@ -20,4 +20,11 @@ interface CartDAO {
     @Transaction
     @Query("SELECT * FROM cart WHERE cartId = :cartId")
     fun getCartWithCartItems(cartId: Int): LiveData<CartWithCartItems>
+
+    @Transaction
+    @Query("SELECT * FROM cart WHERE cartId = :cartId")
+    fun getCartWithCartItemsNoLiveData(cartId: Int): CartWithCartItems
+
+    @Query("DELETE FROM cart_items WHERE cartId = :cartId")
+    suspend fun clearCartItems(cartId: Int)
 }

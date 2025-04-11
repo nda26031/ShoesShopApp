@@ -69,14 +69,9 @@ class DashboardFragment : Fragment() {
         binding.cvCart.setOnClickListener {
             val bundle = Bundle()
             bundle.putInt("cartId", cartId)
+            bundle.putInt("userId", userId)
             findNavController().navigate(R.id.action_userHomeFragment_to_cartFragment, bundle)
         }
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        val fragmentTransaction = parentFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.clUserHome, fragment)
-        fragmentTransaction.commit()
     }
 
     private fun onProductClick(product: Product) {

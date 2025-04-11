@@ -1,4 +1,4 @@
-package com.example.shoesshopapp.ui.fragment.users.order
+package com.example.shoesshopapp.ui.fragment.admin.order
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,9 +9,9 @@ import com.example.shoesshopapp.R
 import com.example.shoesshopapp.databinding.ItemOrderManagerLayoutBinding
 import com.example.shoesshopapp.model.data.Order
 
-class OrderAdapter(private val onItemClick: (Order) -> Unit) :
-    ListAdapter<Order, OrderAdapter.OrderViewHolder>(OrderDiffUtil()) {
-    class OrderViewHolder(
+class OrderManagerAdapter(private val onItemClick: (Order) -> Unit) :
+    ListAdapter<Order, OrderManagerAdapter.OrderManagerViewHolder>(OrderManagerDiffUtil()) {
+    class OrderManagerViewHolder(
         private val binding: ItemOrderManagerLayoutBinding,
         private val onItemClick: (Order) -> Unit
     ) :
@@ -27,21 +27,21 @@ class OrderAdapter(private val onItemClick: (Order) -> Unit) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderManagerViewHolder {
         val binding = ItemOrderManagerLayoutBinding.inflate(
-            parent.context.getSystemService(LayoutInflater::class.java),
+            LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return OrderViewHolder(binding, onItemClick)
+        return OrderManagerViewHolder(binding, onItemClick)
     }
 
-    override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-        val order = getItem(position)
-        holder.bind(order)
+    override fun onBindViewHolder(holder: OrderManagerViewHolder, position: Int) {
+        val currentOrder = currentList[position]
+        holder.bind(currentOrder)
     }
 
-    class OrderDiffUtil : DiffUtil.ItemCallback<Order>() {
+    class OrderManagerDiffUtil() : DiffUtil.ItemCallback<Order>() {
         override fun areItemsTheSame(oldItem: Order, newItem: Order): Boolean {
             return oldItem.orderId == newItem.orderId
         }

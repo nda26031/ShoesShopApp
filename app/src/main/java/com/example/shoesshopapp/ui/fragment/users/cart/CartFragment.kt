@@ -3,27 +3,27 @@ package com.example.shoesshopapp.ui.fragment.users.cart
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoesshopapp.R
 import com.example.shoesshopapp.databinding.FragmentCartBinding
 import com.example.shoesshopapp.model.data.CartItem
+import com.example.shoesshopapp.model.data.Order
+import com.example.shoesshopapp.model.data.OrderStatus
 import com.example.shoesshopapp.model.data.relationship.CartItemWithDetails
 import com.example.shoesshopapp.model.data.relationship.CartWithCartItems
-import com.example.shoesshopapp.model.dataTest.CartProduct
-import com.example.shoesshopapp.ui.fragment.users.cart.thankyou.ThankYouFragment
-import com.example.shoesshopapp.ui.fragment.users.dashboard.DashboardFragment
-
 
 class CartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
     private var cartId: Int = -1
+    private var userId: Int = -1
 
     private val cartViewModel: CartViewModel by lazy {
         ViewModelProvider(
@@ -43,7 +43,7 @@ class CartFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentCartBinding.inflate(inflater, container, false)
         return binding.root
@@ -54,7 +54,9 @@ class CartFragment : Fragment() {
 
         arguments?.let {
             cartId = it.getInt("cartId")
+            userId = it.getInt("userId")
             Log.d("Receive cartId ", cartId.toString())
+            Log.d("Receive userId ", userId.toString())
         }
 
         binding.ivBack.setOnClickListener {
@@ -88,10 +90,25 @@ class CartFragment : Fragment() {
             .setTitle("Check out cart")
             .setMessage("Are you sure you want to check out ?")
             .setPositiveButton("Yes") { _, _ ->
-                replaceFragment(ThankYouFragment())
+                checkOut()
             }
             .setNegativeButton("Cancel", null)
             .show()
+    }
+
+    private fun checkOut() {
+//        val randomNum = (10000..99999).random()
+//        val orderCode = "ODC-$randomNum"
+        val totalCost = binding.tvTotalValue.text.toString().toDouble()
+        if (totalCost != 0.0) {
+            val orderId = cartViewModel.insertOrder(
+                userId = userId, cartId = cartId, totalCost = totalCost
+            )
+            Log.d("orderId", "OrderId: $orderId")
+        } else {
+            Toast.makeText(context, "Please add product", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun updateTotal(cartWithItems: CartWithCartItems) {

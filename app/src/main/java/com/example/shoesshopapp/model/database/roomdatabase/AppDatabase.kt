@@ -13,6 +13,10 @@ import com.example.shoesshopapp.model.data.Cart
 import com.example.shoesshopapp.model.data.CartItem
 import com.example.shoesshopapp.model.data.Converters
 import com.example.shoesshopapp.model.data.FavouriteProduct
+import com.example.shoesshopapp.model.data.Order
+import com.example.shoesshopapp.model.data.OrderItem
+import com.example.shoesshopapp.model.data.OrderStatus
+import com.example.shoesshopapp.model.data.OrderStatusConverter
 import com.example.shoesshopapp.model.data.Product
 import com.example.shoesshopapp.model.data.ProductSize
 import com.example.shoesshopapp.model.data.User
@@ -22,6 +26,8 @@ import com.example.shoesshopapp.model.database.dao.BrandDAO
 import com.example.shoesshopapp.model.database.dao.CartDAO
 import com.example.shoesshopapp.model.database.dao.CartItemDAO
 import com.example.shoesshopapp.model.database.dao.FavouriteProductDAO
+import com.example.shoesshopapp.model.database.dao.OrderDAO
+import com.example.shoesshopapp.model.database.dao.OrderItemDAO
 import com.example.shoesshopapp.model.database.dao.ProductDAO
 import com.example.shoesshopapp.model.database.dao.ProductSizeDAO
 import com.example.shoesshopapp.model.database.dao.UserDAO
@@ -39,11 +45,13 @@ import kotlinx.coroutines.launch
         ProductSize::class,
         FavouriteProduct::class,
         Cart::class,
-        CartItem::class
+        CartItem::class,
+        Order::class,
+        OrderItem::class
     ],
     version = 1,
 )
-@TypeConverters(Converters::class)
+@TypeConverters(Converters::class, OrderStatusConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getAccountDao(): AccountDAO
     abstract fun getUserDao(): UserDAO
@@ -54,7 +62,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getFavouriteProductDao(): FavouriteProductDAO
     abstract fun getCartDao(): CartDAO
     abstract fun getCartItemDao(): CartItemDAO
-
+    abstract fun getOrderDao(): OrderDAO
+    abstract fun getOrderItemDao(): OrderItemDAO
 
     companion object {
         @Volatile
@@ -65,7 +74,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "app_database3"
+                    "app_database2"
                 ).addCallback(roomDatabaseCallback)
                     .build()
                 INSTANCE = instance
